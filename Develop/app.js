@@ -67,7 +67,7 @@ function managerInput(){
     ])
     .then(response => {
         const manager = new Manager(response.ManagerName, response.ManagerID, response.ManagerEmail, response.OfficeNumber);
-        console.log(manager);
+        group.push(manager);
         engineerInput();
     })
     .catch(err => {
@@ -96,11 +96,20 @@ function engineerInput(){
             type: "input",
             name: "EngineerGithub",
             message: "What is the Engineers Github?"
+        },
+        {
+            type: "confirm",
+            name: "addEngineer",
+            message: "Would you like to add another engineer?"
         }
     ])
     .then(response => {
         const engineer = new Engineer(response.EngineerName, response.EngineerID, response.EngineerEmail, response.EngineerGithub);
-        console.log(engineer);
+        group.push(engineer);
+        if (response.addEngineer){
+            addNewEngineer();
+        }
+        else
         internInput();
     })
     .catch(err => {
@@ -129,13 +138,36 @@ function internInput(){
             type: "input",
             name: "InternSchool",
             message: "What school does the Intern go to?"
+        },
+        {
+            type: "confirm",
+            name: "addIntern",
+            message: "Would you like to add another Intern?"
         }
     ])
     .then(response => {
         const intern = new Intern(response.InternName, response.InternID, response.InternEmail, response.InternSchool);
-        console.log(intern);
+        group.push(intern);
+        if (response.addIntern){
+            addNewIntern();
+        }
+        else
+        console.log(group);
+        const newHTML = render(group);
+        fs.writeFile("../output/team.html", newHTML, function(err){
+            if(err)
+                throw err;
+        });
     })
     .catch(err => {
         console.log("it failed ", err)
     });
+};
+
+function addNewEngineer(){
+    engineerInput();
+};
+
+function addNewIntern(){
+    internInput();
 };
