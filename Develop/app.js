@@ -10,6 +10,8 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+const group = [];
+
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
@@ -33,3 +35,107 @@ const render = require("./lib/htmlRenderer");
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
+
+makeTeam();
+
+function makeTeam(){
+    managerInput();
+};
+
+function managerInput(){
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "ManagerName",
+            message: "What is the name of the manager?"
+        },
+        {
+            type: "input",
+            name: "ManagerID",
+            message: "What is the manager ID?"
+        },
+        {
+            type: "input",
+            name: "ManagerEmail",
+            message: "What is the Manager email?"
+        },
+        {
+            type: "input",
+            name: "OfficeNumber",
+            message: "What is the managers office number?"
+        }
+    ])
+    .then(response => {
+        const manager = new Manager(response.ManagerName, response.ManagerID, response.ManagerEmail, response.OfficeNumber);
+        console.log(manager);
+        engineerInput();
+    })
+    .catch(err => {
+        console.log("it failed ", err)
+    });
+};
+
+function engineerInput(){
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "EngineerName",
+            message: "What is the name of the Engineer?"
+        },
+        {
+            type: "input",
+            name: "EngineerID",
+            message: "What is the Engineer ID?"
+        },
+        {
+            type: "input",
+            name: "EngineerEmail",
+            message: "What is the Engineers email?"
+        },
+        {
+            type: "input",
+            name: "EngineerGithub",
+            message: "What is the Engineers Github?"
+        }
+    ])
+    .then(response => {
+        const engineer = new Engineer(response.EngineerName, response.EngineerID, response.EngineerEmail, response.EngineerGithub);
+        console.log(engineer);
+        internInput();
+    })
+    .catch(err => {
+        console.log("it failed ", err)
+    });
+};
+
+function internInput(){
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "InternName",
+            message: "What is the name of the Intern?"
+        },
+        {
+            type: "input",
+            name: "InternID",
+            message: "What is the Intern ID?"
+        },
+        {
+            type: "input",
+            name: "InternEmail",
+            message: "What is the Interns email?"
+        },
+        {
+            type: "input",
+            name: "InternSchool",
+            message: "What school does the Intern go to?"
+        }
+    ])
+    .then(response => {
+        const intern = new Intern(response.InternName, response.InternID, response.InternEmail, response.InternSchool);
+        console.log(intern);
+    })
+    .catch(err => {
+        console.log("it failed ", err)
+    });
+};
