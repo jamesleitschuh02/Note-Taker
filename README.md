@@ -1,7 +1,7 @@
 # Team-Manager
 
-![alt_text](./Assets/screenshot.jpg)
-![alt_text](./Assets/testScreenshot.jpg)
+![alt_text](./Assets/screenshot.png)
+![alt_text](./Assets/testScreenshot.JPG)
 
 https://drive.google.com/file/d/124jH0gZb1xVufpUihu4hncLoMAqXQzgw/view?usp=sharing
 
